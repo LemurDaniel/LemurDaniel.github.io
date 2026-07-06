@@ -22,7 +22,9 @@ const Highscore = ({ score, ticks, gameRunning, onRestart }) => {
 
     const [playSound] = useAudio();
     const { meta } = useContext(UserContext);
+    // eslint-disable-next-line no-unused-vars
     const [scores, setScores] = useState([]);
+    // eslint-disable-next-line no-unused-vars
     const [userScore, setUserScore] = useState({});
 
 
@@ -30,13 +32,13 @@ const Highscore = ({ score, ticks, gameRunning, onRestart }) => {
         if (gameRunning) return;
         const onGameEnd = async () => {
 
+            /*
             const updScore = {
                 score: score,
                 ticks: ticks,
                 timestamp: new Date().toISOString().split('.')[0]
             }
 
-            /*
             try {
                 await fetch(meta.endpoint + `/score?token=${meta.token}`, {
                     method: 'POST',
