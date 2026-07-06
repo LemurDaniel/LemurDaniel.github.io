@@ -62,8 +62,6 @@ class ParticleManager {
 
     _checkDying(canvas) {
 
-        const ctx = canvas.getContext('2d');
-
         let end = this.dying.length - 1;
         for (let i = 0; i <= end; i++) {
 

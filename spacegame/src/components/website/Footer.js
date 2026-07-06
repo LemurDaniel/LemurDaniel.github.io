@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { BiCopyright } from 'react-icons/bi';
-import { SiTailwindcss, SiMysql, SiLetsencrypt } from 'react-icons/si';
-import { IoLogoJavascript, IoLogoLinkedin, IoLogoXing } from 'react-icons/io';
-import { IoLogoNodejs, IoLogoReact, IoLogoGithub, IoLogoDocker } from 'react-icons/io5';
+import { SiTailwindcss } from 'react-icons/si';
+import { IoLogoJavascript, IoLogoLinkedin } from 'react-icons/io';
+import { IoLogoReact, IoLogoGithub } from 'react-icons/io5';
 
 
 const Footer = () => {

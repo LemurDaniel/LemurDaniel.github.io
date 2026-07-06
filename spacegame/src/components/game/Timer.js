@@ -6,6 +6,7 @@ const Timer = ({ticks, setTicks, pause}) => {
         if(pause) return;
         const ticker = setInterval( () => setTicks(t => t+1), 1000)
         return () => clearInterval(ticker);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[ticks, pause])
     
     const sec = ticks % 60;

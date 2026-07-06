@@ -36,8 +36,9 @@ const Highscore = ({ score, ticks, gameRunning, onRestart }) => {
                 timestamp: new Date().toISOString().split('.')[0]
             }
 
+            /*
             try {
-                let res = await fetch(meta.endpoint + `/score?token=${meta.token}`, {
+                await fetch(meta.endpoint + `/score?token=${meta.token}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -60,9 +61,11 @@ const Highscore = ({ score, ticks, gameRunning, onRestart }) => {
             } catch (err) {
                 console.log(err)
             }
+            */
 
         }
         onGameEnd();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [gameRunning])
 
     useEffect(() => {
@@ -70,6 +73,7 @@ const Highscore = ({ score, ticks, gameRunning, onRestart }) => {
         if (scores[0].userDisplayName !== meta.user) return;
 
         setTimeout(() => playSound("highscore", 1, true), 1500)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userScore]);
 
     const timestampNow = new Date(userScore.timestamp).toLocaleDateString();

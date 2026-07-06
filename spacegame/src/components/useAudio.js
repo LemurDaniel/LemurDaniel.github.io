@@ -21,7 +21,10 @@ const useAudio = () => {
         }
 
     }
-    useEffect(getSoundEffects, [])
+    useEffect(() => {
+        getSoundEffects();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const playSound = (filename, volume = 0.15, playSingle = false) => {
 

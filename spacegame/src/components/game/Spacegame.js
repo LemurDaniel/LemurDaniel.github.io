@@ -65,8 +65,6 @@ const Spacegame = () => {
     // Also called on restart game.
     const initializeGame = () => {
 
-        const c = canvasRef.current;
-
         if (data.ship !== null) data.ship.onInActive();
         if (data.asteroids !== null) data.asteroids.reset();
 
@@ -102,6 +100,7 @@ const Spacegame = () => {
         initializeGame();
 
         return () => window.onresize = null;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
    
 
@@ -157,6 +156,7 @@ const Spacegame = () => {
         if (score < treshhold) return;
         setTreshhold(score * Math.max(TRESHHOLD_INCREASE - TRESHHOLD_DAMPEN * astAmount, 1.01));
         setAstTarget(amount => amount + 1);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [score])
     useEffect(() => {
         const { ship, asteroids } = data;
@@ -256,6 +256,7 @@ const Spacegame = () => {
 
         const ticker = setInterval(() => loop(), delta);
         return () => clearInterval(ticker);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pause, gameRunning]);
 
 
