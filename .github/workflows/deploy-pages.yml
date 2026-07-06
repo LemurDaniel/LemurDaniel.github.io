@@ -37,6 +37,7 @@ jobs:
       - name: Assemble site
         run: |
           mkdir -p site
+          cp -r assets site/
           cp index.html style.css site/
           cp -r spacegame/build site/spacegame
 
