@@ -1,2 +1,2 @@
 # Hosted on: 
-### https://lemurdaniel.github.io/spacegame/
+### https://lemurdaniel.github.io
