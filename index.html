@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Daniel Landau (LemurDaniel) — IT-Infrastruktur, Cloud & Automatisierung." />
+  <meta name="author" content="LemurDaniel" />
+  <title>Daniel Landau · LemurDaniel</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦥</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="hero">
+    <div class="container">
+      <p class="eyebrow">Hi, ich bin</p>
+      <h1>Daniel Landau</h1>
+      <p class="handle">@LemurDaniel</p>
+      <p class="tagline">IT-Infrastruktur &amp; Cloud Engineering — Terraform, Azure, Automatisierung</p>
+      <nav class="links">
+        <a href="https://github.com/LemurDaniel" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section id="about" class="section">
+      <h2>Über mich</h2>
+      <p>
+        Ich arbeite projektbasiert im Bereich IT-Infrastruktur und beschäftige mich vor allem mit
+        Cloud- und Automatisierungsthemen rund um Azure. Am liebsten baue ich Dinge, die sich
+        wiederverwenden lassen, statt Einzellösungen — modular, parametrisch und automatisiert.
+      </p>
+
+      <div class="tags">
+        <span class="tag">Terraform</span>
+        <span class="tag">Azure</span>
+        <span class="tag">Kubernetes</span>
+        <span class="tag">Bicep</span>
+        <span class="tag">PowerShell</span>
+        <span class="tag">C#</span>
+        <span class="tag">Node.js</span>
+      </div>
+    </section>
+
+    <section id="hobbys" class="section">
+      <h2>Wenn ich nicht am Rechner sitze… sitze ich meistens trotzdem am Rechner</h2>
+      <p>
+        Alles mögliche an spielen wie Minecraft (mittelalterliche Städte), Sim-Racing in Forza Horizon 5 und Stargate SG-1.
+      </p>
+    </section>
+
+    <section id="apps" class="section">
+      <h2>Unterseiten</h2>
+      <p class="section-intro">Ein paar Projekte zum Ausprobieren.</p>
+
+      <div class="card-grid">
+        <a class="card" href="app/">
+          <h3>Spacegame — React App</h3>
+          <p>Kleines Asteroids-artiges Browser-Spiel mit Highscore, gebaut in React.</p>
+          <span class="card-cta">Öffnen →</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="year"></span> Daniel Landau · Gebaut &amp; gehostet mit GitHub Pages</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

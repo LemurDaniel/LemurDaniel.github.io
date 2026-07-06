@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Ghost element for fixed nav */
+
+body::before {
+    display: block;
+    content: '';
+    height: 40px;
+  
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+    display: none;
+}
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+body {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+body {
+    @apply bg-dark-800 relative
+}
+
+
+.stop-scrolling {
+    height: 100%;
+    overflow: hidden;
+}
+
+
+/* href style */
+.links a {
+    @apply underline text-blue-600 hover:text-blue-800 visited:text-purple-600
+ }
+
+/* Header for Tasklist */
+
+.header {
+    @apply py-5 px-12 text-center lg:text-left lg:flex justify-between items-center
+}
+
+
+.modal {
+    @apply fixed inset-x-0 w-min mx-auto top-28 z-50   flex justify-center items-center   shadow-2xl
+}
+.modal > div {
+    @apply rounded-md border-brand2-100 border w-80   text-white bg-white
+}
+
+
+
+/* Button types */
+
+.btn-prominent {
+    @apply py-1 px-2   mx-auto   text-lg  md:text-xl    focus:outline-none rounded-md border-2
+}
+.btn-decent {
+    @apply px-2 mx-auto border-b rounded-sm 
+}
+
+.btn-orange {
+    @apply bg-dark-700 border-brand2-300 text-brand2-300   hover:border-white hover:text-white hover:bg-brand2-300  duration-300
+} 
+
+.btn-light {
+    @apply border-brand2-100 text-brand2-100   hover:bg-brand2-100 hover:text-dark-700 duration-300
+}
+
+
+
+/* Other Inputs */
+
+.input-light {
+    @apply h-8 rounded-sm bg-dark-800 text-brand2-100 focus:outline-none border-b
+}
+
+.input-responsive {
+    @apply input-light px-2 mx-2 text-center md:text-left  mt-2 md:mt-0
+}
+
+
+.rounded-active {
+    @apply w-9 h-9  rounded-full bg-blue-600 text-white 
+}
+.rounded-active.hoverable {
+    @apply w-9 h-9  rounded-full bg-blue-600 text-white hover:bg-white hover:text-black duration-300
+}
+
+.rounded-inactive {
+    @apply w-9 h-9  rounded-full bg-white text-black
+}
+.rounded-inactive.hoverable {
+    @apply w-9 h-9  rounded-full bg-white hover:bg-blue-600 hover:text-white duration-300
+}
+
+
+.rounded-light {
+    @apply text-white border-2 rounded-full hover:bg-white hover:text-dark-700 duration-300
+}
+
+.rounded-normal {
+    @apply p-2  text-2xl  hidden  sm:block  hover:opacity-80  rounded-full  bg-white
+}
+
+
+
+
+
+/* Displaying Images in the gallery */
+
+.image-card {
+    @apply m-4 md:m-1 md:w-52 rounded-md   text-brand2-100 text-center text-lg  bg-dark-800  shadow-2xl
+}
+.image-card > h1 {
+    @apply mb-2 font-bold text-dark-700 bg-brand2-100 rounded-t-md
+}
+.image-card > img {
+    @apply pb-2 w-72 md:w-full rounded-sm mx-auto
+}
+.image-card > div {
+    @apply py-2 block md:text-sm
+}
+
+
+
+
+.footer-icon {
+    @apply inline mx-1 w-5 h-5 hover:bg-white hover:text-dark-700 rounded-full duration-300
+}
