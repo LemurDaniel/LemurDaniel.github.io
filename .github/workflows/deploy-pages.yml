@@ -38,7 +38,7 @@ jobs:
         run: |
           mkdir -p site
           cp index.html style.css site/
-          cp -r spacegame/build site/app
+          cp -r spacegame/build site/spacegame
 
       - uses: actions/upload-pages-artifact@v3
         with:

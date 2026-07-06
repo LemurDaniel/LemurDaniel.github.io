@@ -24,7 +24,7 @@ function App() {
     <>
       <UserContext.Provider value={{ meta, setMeta }}>
 
-        <Router basename="/app">
+        <Router basename="/spacegame">
 
           <Nav />
 

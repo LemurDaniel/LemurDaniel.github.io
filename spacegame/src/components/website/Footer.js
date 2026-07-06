@@ -14,14 +14,14 @@ const Footer = () => {
 
 
             <div className="order-1 mx-auto md:mx-0 py-1 md:py-0   block md:hidden">
-                <a href="/app/impressum" className="font-extralight hover:underline   border-l pl-1">
+                <a href="/spacegame/impressum" className="font-extralight hover:underline   border-l pl-1">
                     Datenschutz & Impressum
                 </a>
             </div>
 
 
             <div className="order-2 mx-auto lg:mx-0  py-1 md:py-0   border-gray-700 border-t md:border-t-0     font-extralight">
-                <a href="/app/impressum" className="border-r px-2  hover:underline  hidden md:inline">
+                <a href="/spacegame/impressum" className="border-r px-2  hover:underline  hidden md:inline">
                     Datenschutz & Impressum
                 </a>
                 <p className="px-2 inline "> <BiCopyright className="inline" />
