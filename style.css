@@ -202,6 +202,10 @@ body {
   background: #012456;
 }
 
+.icon-esp32 {
+  background: #e7352c;
+}
+
 .card h3 {
   margin: 0;
   font-size: 1.05rem;
