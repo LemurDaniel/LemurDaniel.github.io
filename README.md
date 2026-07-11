@@ -1,2 +1,2 @@
 # Hosted on: 
-### https://lemurdaniel.github.io
+### https://lemurdaniel.de
