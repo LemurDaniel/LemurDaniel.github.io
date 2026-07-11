@@ -1,6 +1,6 @@
 # Backend
 
-Reverse-Proxy-Setup für `*.backend.lemurdaniel.de`, läuft auf dem eigenen Server.
+Reverse-Proxy-Setup für Subdomains von `lemurdaniel.de`, läuft auf dem eigenen Server.
 
 Basiert auf [nginx-proxy](https://github.com/nginx-proxy/nginx-proxy) +
 [acme-companion](https://github.com/nginx-proxy/acme-companion): jeder Container,
@@ -12,9 +12,9 @@ Let's-Encrypt-Zertifikat. Kein manuelles Editieren von nginx.conf pro Service.
 
 - Docker + Docker Compose auf dem Server (siehe `install-docker.sh`)
 - Ports 80 und 443 frei (für HTTP-01 Challenge und HTTPS)
-- DNS: ein Wildcard-Record `*.backend.lemurdaniel.de` → IP des Servers
-  (einzelne Zertifikate pro Subdomain funktionieren trotzdem, da acme-companion
-  HTTP-01 pro Host einzeln durchführt)
+- DNS: ein Wildcard-Record `*.lemurdaniel.de` → IP des Servers, Proxy-Status
+  "DNS only" (kein Cloudflare-Proxy, sonst schlägt die HTTP-01-Challenge fehl
+  bzw. Cloudflares Universal-SSL greift nicht für zweistufige Subdomains)
 
 ## Docker installieren
 
@@ -37,9 +37,19 @@ docker compose up -d
 
 Das startet den Proxy und legt das externe Netzwerk `backend` an.
 
-`backend.lemurdaniel.de` selbst liefert keinen eigenen Service, sondern
-redirected (301) auf `https://lemurdaniel.de`. Nur Subdomains darunter
-(`*.backend.lemurdaniel.de`) routen zu den jeweiligen Services.
+Jede Subdomain von `lemurdaniel.de` ohne eigenen registrierten Service (z.B.
+Tippfehler oder noch nicht deployte Namen) landet per 301-Redirect auf
+`https://lemurdaniel.de` (siehe `root-redirect` in `docker-compose.yml`).
+Subdomains mit eigenem Service (z.B. `example.lemurdaniel.de`,
+`terraform-playground.lemurdaniel.de`) routen stattdessen zum jeweiligen
+Container, da nginx spezifischere `server_name`-Einträge immer vor Wildcards
+bevorzugt.
+
+Wichtig: der Wildcard-Redirect-Container bekommt selbst **kein** Zertifikat
+(siehe Kommentar in `docker-compose.yml` — Let's Encrypt vergibt Wildcards nur
+via DNS-01). Für nicht registrierte Subdomains gibt es bei HTTPS-Aufrufen also
+eine Zertifikatswarnung, bevor der Redirect greift; registrierte Services sind
+davon nicht betroffen, die bekommen wie gewohnt ihr eigenes echtes Zertifikat.
 
 ## Neuen Service (Pod) hinzufügen
 
@@ -52,12 +62,11 @@ redirected (301) auf `https://lemurdaniel.de`. Nur Subdomains darunter
    ```
 
 3. Nach ca. 30–60 Sekunden ist der Service unter
-   `https://<subdomain>.backend.lemurdaniel.de` erreichbar, inkl. gültigem
-   Zertifikat.
+   `https://<subdomain>.lemurdaniel.de` erreichbar, inkl. gültigem Zertifikat.
 
 ## CORS
 
-Da die Frontend-Seite (`lemurdaniel.de`, GitHub Pages) und die API
-(`*.backend.lemurdaniel.de`) unterschiedliche Origins sind, muss jeder
+Da die Frontend-Seite (`lemurdaniel.de`, GitHub Pages) und ein Backend-Service
+(z.B. `example.lemurdaniel.de`) unterschiedliche Origins sind, muss jeder
 Backend-Service selbst CORS-Header setzen (`Access-Control-Allow-Origin:
 https://lemurdaniel.de`), der Proxy macht das nicht automatisch.

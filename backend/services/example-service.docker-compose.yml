@@ -45,11 +45,11 @@ services:
     restart: unless-stopped
     environment:
       # Subdomain, unter der der Service erreichbar sein soll
-      - VIRTUAL_HOST=example.backend.lemurdaniel.de
+      - VIRTUAL_HOST=example.lemurdaniel.de
       # Port, auf dem der Container intern lauscht
       - VIRTUAL_PORT=80
       # Gleiche Subdomain nochmal -> acme-companion holt automatisch ein Zertifikat
-      - LETSENCRYPT_HOST=example.backend.lemurdaniel.de
+      - LETSENCRYPT_HOST=example.lemurdaniel.de
       - LETSENCRYPT_EMAIL=landau.daniel.1998@gmail.com
     networks:
       - backend
