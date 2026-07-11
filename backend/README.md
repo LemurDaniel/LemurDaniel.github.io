@@ -37,6 +37,10 @@ docker compose up -d
 
 Das startet den Proxy und legt das externe Netzwerk `backend` an.
 
+`backend.lemurdaniel.de` selbst liefert keinen eigenen Service, sondern
+redirected (301) auf `https://lemurdaniel.de`. Nur Subdomains darunter
+(`*.backend.lemurdaniel.de`) routen zu den jeweiligen Services.
+
 ## Neuen Service (Pod) hinzufügen
 
 1. `services/example-service.docker-compose.yml` kopieren, umbenennen, Image/Port/
