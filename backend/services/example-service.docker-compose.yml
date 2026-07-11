@@ -37,14 +37,17 @@
 
 services:
   example-service:
-    image: ghcr.io/you/example-service:latest
+    # Echtes, existierendes Test-Image (kleine "Hello World"-Seite von nginx),
+    # nur damit du Routing + Zertifikat einmal end-to-end testen kannst.
+    # Für einen eigenen Service durch dein eigenes Image ersetzen.
+    image: nginxdemos/hello:latest
     container_name: example-service
     restart: unless-stopped
     environment:
       # Subdomain, unter der der Service erreichbar sein soll
       - VIRTUAL_HOST=example.backend.lemurdaniel.de
       # Port, auf dem der Container intern lauscht
-      - VIRTUAL_PORT=3000
+      - VIRTUAL_PORT=80
       # Gleiche Subdomain nochmal -> acme-companion holt automatisch ein Zertifikat
       - LETSENCRYPT_HOST=example.backend.lemurdaniel.de
       - LETSENCRYPT_EMAIL=landau.daniel.1998@gmail.com
