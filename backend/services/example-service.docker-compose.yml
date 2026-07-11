@@ -1,0 +1,57 @@
+# Beispiel: so hängst du einen neuen Backend-Service (Pod) an den Proxy an.
+# Datei kopieren, umbenennen und anpassen. Läuft unabhängig von diesem File
+# per `docker compose -f services/<name>.docker-compose.yml up -d`,
+# solange das externe Netzwerk "backend" existiert (siehe ../docker-compose.yml).
+#
+# Wie die Env-Vars unten wirken:
+#
+# Das sind keine "normalen" App-Umgebungsvariablen, sondern ein Signalmechanismus,
+# den nginx-proxy und acme-companion auslesen, indem sie den Docker-Socket
+# beobachten (/var/run/docker.sock, siehe die Volume-Mounts in ../docker-compose.yml).
+#
+# - VIRTUAL_HOST: nginx-proxy lauscht auf Docker-Events. Sobald ein Container mit
+#   dieser Env-Var startet, generiert es automatisch einen passenden
+#   `server { server_name ...; }`-Block in seiner nginx-Konfiguration, der Requests
+#   für diese Subdomain an den Container weiterleitet.
+#
+# - VIRTUAL_PORT: sagt nginx-proxy, auf welchem internen Port der Ziel-Container
+#   lauscht (falls der Container mehrere Ports exposed oder es nicht automatisch
+#   erkennbar ist — bei nur einem exponierten Port ist es sogar optional).
+#
+# - LETSENCRYPT_HOST: acme-companion liest genauso die Docker-Events mit und schaut
+#   speziell nach dieser Var. Findet es sie, stellt es für diese Domain automatisch
+#   per HTTP-01-Challenge (über den bereits laufenden nginx-proxy auf Port 80) ein
+#   Let's-Encrypt-Zertifikat aus und legt es im gemeinsamen Volume proxy_certs ab,
+#   das nginx-proxy dann für HTTPS nutzt.
+#
+# - LETSENCRYPT_EMAIL: optional pro Service — überschreibt für diesen einen Host
+#   die globale DEFAULT_EMAIL aus ../docker-compose.yml, falls z.B. unterschiedliche
+#   Kontaktadressen pro Projekt gewünscht sind. Meistens reicht die globale, die
+#   Zeile könnte hier auch weggelassen werden.
+#
+# Wichtig: Der Container selbst muss nicht wissen, dass er hinter dem Proxy läuft.
+# Er braucht keinen Port nach außen (ports:) zu veröffentlichen — nginx-proxy
+# erreicht ihn intern über das gemeinsame Docker-Netzwerk "backend" anhand des
+# Container-Namens. Die Env-Vars sind reine Metadaten, die von außen (den beiden
+# Proxy-Containern) gelesen werden, nicht vom Service selbst.
+
+services:
+  example-service:
+    image: ghcr.io/you/example-service:latest
+    container_name: example-service
+    restart: unless-stopped
+    environment:
+      # Subdomain, unter der der Service erreichbar sein soll
+      - VIRTUAL_HOST=example.backend.lemurdaniel.de
+      # Port, auf dem der Container intern lauscht
+      - VIRTUAL_PORT=3000
+      # Gleiche Subdomain nochmal -> acme-companion holt automatisch ein Zertifikat
+      - LETSENCRYPT_HOST=example.backend.lemurdaniel.de
+      - LETSENCRYPT_EMAIL=landau.daniel.1998@gmail.com
+    networks:
+      - backend
+
+networks:
+  backend:
+    external: true
+    name: backend
